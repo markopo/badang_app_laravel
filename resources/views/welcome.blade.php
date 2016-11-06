@@ -19,7 +19,7 @@
         <div id="wrapper">
             <h2>Meetings</h2>
 
-
+            <p>Badangapp är den bästa app jag haft!</p>
 
 
         </div>
