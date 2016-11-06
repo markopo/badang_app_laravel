@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Meetings;
 use Illuminate\Http\Request;
 
 class MeetingController extends Controller
@@ -14,6 +15,11 @@ class MeetingController extends Controller
     public function index()
     {
         //
+       $response = [
+           'meetings' => Meetings::all()
+       ];
+
+        return response()->json($response, 200);
     }
 
     /**
@@ -24,6 +30,7 @@ class MeetingController extends Controller
     public function create()
     {
         //
+        return "meeting";
     }
 
     /**
@@ -35,6 +42,7 @@ class MeetingController extends Controller
     public function store(Request $request)
     {
         //
+        return "meeting";
     }
 
     /**
@@ -45,7 +53,11 @@ class MeetingController extends Controller
      */
     public function show($id)
     {
-        //
+        $response = [
+            'meetings' => Meetings::find($id)
+        ];
+
+        return response()->json($response, 200);
     }
 
     /**
@@ -57,6 +69,7 @@ class MeetingController extends Controller
     public function edit($id)
     {
         //
+        return "meeting";
     }
 
     /**
@@ -69,6 +82,7 @@ class MeetingController extends Controller
     public function update(Request $request, $id)
     {
         //
+        return "meeting";
     }
 
     /**
@@ -80,5 +94,6 @@ class MeetingController extends Controller
     public function destroy($id)
     {
         //
+        return "meeting";
     }
 }
