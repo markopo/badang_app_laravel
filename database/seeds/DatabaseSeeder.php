@@ -14,10 +14,10 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(UsersTableSeeder::class);
 
-      for($i=0;$i<10;$i++) {
+      for($i=0;$i<100;$i++) {
         DB::table('meetings')->insert([
             'title' => 'title ' . str_random(10),
-            'description' => str_random(10),
+            'description' => str_random(100),
             'time' => Carbon::now()
         ]);
       }
