@@ -3,10 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Meetings;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Repositories;
+use League\Flysystem\Exception;
 
 class MeetingController extends Controller
 {
+
+
+    private $meetingUsersRepo;
+
+    public function __construct()
+    {
+        $this->meetingUsersRepo = new Repositories\MeetingUsersRepository();
+
+    }
+
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -22,14 +38,15 @@ class MeetingController extends Controller
             $limit = (int)$limit_str;
         }
 
+
         if($order != null && $order === "desc") {
-            $meetings = Meetings::orderBy('id', 'desc')->take($limit)->get();
+            $meetings =  $this->meetingUsersRepo->GetMeetingUsers("desc", $limit);
         }
         else {
-            $meetings = Meetings::orderBy('id', 'asc')->take($limit)->get();
+            $meetings = $this->meetingUsersRepo->GetMeetingUsers("asc", $limit);
         }
 
-        //
+
        $response = [
            'meetings' => $meetings
        ];
@@ -45,7 +62,7 @@ class MeetingController extends Controller
     public function create()
     {
         //
-        return "meeting";
+        return view('create_meeting');
     }
 
     /**
@@ -56,8 +73,56 @@ class MeetingController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        return "meeting";
+
+        $title = $request->get("title");
+        $description = $request->get("description");
+        $time = $request->get("time");
+
+        $isTitleNotValid = strlen($title) < 1;
+        $isDescriptionNotValid = strlen($description) < 1;
+        $isTimeNotValid = strlen($time) < 1;
+
+        if($isTitleNotValid || $isDescriptionNotValid || $isTimeNotValid) {
+
+            $validationMessage = 'Validation Error: ';
+
+            if($isTitleNotValid) {
+                $validationMessage .= 'Title is required ';
+            }
+
+            if($isDescriptionNotValid) {
+                $validationMessage .= 'Description is required ';
+            }
+
+            if($isTimeNotValid) {
+                $validationMessage .= 'Time is required ';
+            }
+
+            return response()->json([
+                'msg' => $validationMessage,
+                'meeting' => []
+            ], 200);
+        }
+
+
+
+        $meeting = new Meetings([
+            'time' => Carbon::createFromFormat('YmdHie', $time),
+            'title' => $title,
+            'description' => $description
+        ]);
+
+        if($meeting->save()) {
+
+            return response()->json([
+                'msg' => 'Message created',
+                'meeting' => $meeting
+            ], 201);
+        }
+
+
+        return response()->json([ 'msg' => 'Error during creation!' ], 404);
+
     }
 
     /**
@@ -96,8 +161,32 @@ class MeetingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        return "meeting";
+        $this->validate($request, [
+            'title' => 'required',
+            'description' => 'required',
+            'time' => 'required|date_format:YmdHie'
+        ]);
+
+        $title = $request->get("title");
+        $description = $request->get("description");
+        $time = $request->get("time");
+
+        if($id != null && is_numeric($id)) {
+
+            $meeting = Meetings::find($id);
+            if($meeting != null) {
+
+               $meeting->title = $title;
+               $meeting->description = $description;
+               $meeting->time = Carbon::createFromFormat('YmdHie', $time);
+
+               if($meeting->save()) {
+                   return response()->json([ 'msg' => 'meeting updated', 'meeting' => $meeting ], 201);
+               }
+            }
+        }
+
+        return response()->json([ 'msg' => 'Error during updating!' ], 404);
     }
 
     /**

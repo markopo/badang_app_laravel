@@ -1,6 +1,8 @@
 /node_modules
 /public/storage
 /vendor
+/img
+js/bower_components
 /.idea
 Homestead.json
 Homestead.yaml

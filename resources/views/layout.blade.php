@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Laravel</title>
+    <link href="{{URL::to('/')}}/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <link href="{{URL::to('/')}}/css/bootstrap-theme.min.css" type="text/css" rel="stylesheet" />
     <style>
         #wrapper {
             margin: 0 auto;
@@ -14,6 +16,12 @@
         }
 
     </style>
+    <script src="{{URL::to('/')}}/js/jquery.min.js"></script>
+    <script src="{{URL::to('/')}}/js/knockout.js"></script>
+    <script src="{{URL::to('/')}}/js/jquery.validate.min.js"></script>
+    <script src="{{URL::to('/')}}/js/bootstrap.min.js" ></script>
+
+
 </head>
 <body>
 <div id="wrapper">

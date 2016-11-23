@@ -12,10 +12,25 @@
 */
 
 Route::get('/', function () {
+
     return view('welcome');
 });
 
 Route::get('/test', function () {
     return "hej test";
 });
+
+Route::get('/login', 'LoginController@index');
+Route::post('/doLogin', 'LoginController@doLogin');
+Route::get('/Logout', 'LoginController@logout');
+
+
+Route::get('articles/create', 'ArticlesController@create');
+Route::post('articles/create', 'ArticlesController@store');
+
+
+Route::get('admin/', 'AdminController@index');
+Route::post('admin/upload/', 'AdminController@upload');
+Route::get('admin/show','AdminController@show');
+
 
