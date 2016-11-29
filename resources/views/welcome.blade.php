@@ -4,7 +4,5 @@
 @section('content')
 
     <p>Welcome everybody</p>
-
-    hej igen
-
+    <a href="/feedback" >Click me</a>
 @stop

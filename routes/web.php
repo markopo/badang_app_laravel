@@ -16,8 +16,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test', function () {
-    return "hej test";
+Route::get('/feedback', function () {
+    return "You've been clicked, punk.";
 });
 
 Route::get('/login', 'LoginController@index');
