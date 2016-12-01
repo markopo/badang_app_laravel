@@ -1,0 +1,42 @@
+$bg-color: #f00;
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+.message {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+
+
+.laravel {
+    width: 600px / 960px * 100%;
+    background: $bg-color;
+    font: 100% $font-stack;
+    color: $primary-color;
+
+    .box { @include border-radius(10px); }
+
+    .success {
+      @extend .message;
+      border-color: green;
+    }
+
+    .error {
+      @extend .message;
+      border-color: red;
+    }
+
+    .warning {
+      @extend .message;
+      border-color: yellow;
+    }
+}

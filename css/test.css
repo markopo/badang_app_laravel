@@ -1,0 +1,30 @@
+.message, .laravel .success, .laravel .error, .laravel .warning {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.laravel {
+  width: 62.5%;
+  background: #f00;
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+.laravel .box {
+  border-radius: 10px;
+}
+
+.laravel .success {
+  border-color: green;
+}
+
+.laravel .error {
+  border-color: red;
+}
+
+.laravel .warning {
+  border-color: yellow;
+}
+
+/*# sourceMappingURL=test.css.map */

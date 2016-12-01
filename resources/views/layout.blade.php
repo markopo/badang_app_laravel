@@ -8,6 +8,7 @@
     <title>Laravel</title>
     <link href="{{URL::to('/')}}/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
     <link href="{{URL::to('/')}}/css/bootstrap-theme.min.css" type="text/css" rel="stylesheet" />
+    <link href="{{URL::to('/')}}/css/app.css" type="text/css" rel="stylesheet" />
     <style>
         #wrapper {
             margin: 0 auto;
